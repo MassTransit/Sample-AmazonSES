@@ -8,6 +8,7 @@ packages
 
 *.ncrunch*
 .vs
+.env
 
 .fake
 
