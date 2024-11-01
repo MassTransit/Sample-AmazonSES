@@ -8,7 +8,7 @@ using Serilog;
 using Serilog.Events;
 
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
+    .MinimumLevel.Debug()
     .MinimumLevel.Override("MassTransit", LogEventLevel.Information)
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.Hosting", LogEventLevel.Information)
@@ -54,8 +54,8 @@ builder.Services.AddMassTransit(x =>
     {
         cfg.UseDelayedMessageScheduler();
 
-        cfg.Message<AmazonSesBounceNotification>(m => m.SetEntityName("Bounced_email"));
-        cfg.Message<AmazonSesComplaintNotification>(m => m.SetEntityName("Complaint_email"));
+        cfg.Message<AmazonSesBounceNotification>(m => m.SetEntityName("ses-bounces"));
+        cfg.Message<AmazonSesComplaintNotification>(m => m.SetEntityName("ses-complaints"));
 
         cfg.ConfigureEndpoints(context);
     });
